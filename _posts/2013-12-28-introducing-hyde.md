@@ -31,4 +31,26 @@ In summary, Intel SGX offers the following protections from known hardware and s
 - Data isolated within enclaves can only be accessed by code that shares the enclave.
 
 As a result, the attack surface can be largely reduced after applying Intel SGX:
+
 ![Attack Surface](/hydeout/assets/pics/overview1.png)
+
+However, there are still several security limitation faced by Intel SGX:
+
+- Cache timing attacks
+- Physical attacks. E.g. laser fault injection attacks
+- Microcode malicious patching
+- Untrusted I/O
+- Human element. E.g. trusted development environment
+- CPU bugs and bugs in dependencies.
+
+Note that SGX trusted enclaves and microcode can be patched. However, memory encryption crypto cannot be patched since it is fused to hardware.
+
+Nevertheless, those security concerns are out of the tutorial's scope. Now let's get started with SGX!
+
+References:
+
+1. https://www.blackhat.com/docs/us-16/materials/us-16-Aumasson-SGX-Secure-Enclaves-In-Practice-Security-And-Crypto-Review.pdf
+2. http://www.cs.tau.ac.il/~tromer/istvr1516-files/lecture10-trusted-platform-sgx.pdf
+3. https://software.intel.com/en-us/articles/intel-software-guard-extensions-tutorial-part-1-foundation
+4. https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures
+5. https://download.01.org/intel-sgx/linux-2.2/docs/Intel_SGX_Developer_Guide.pdf
