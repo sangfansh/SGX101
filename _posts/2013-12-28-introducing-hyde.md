@@ -1,37 +1,34 @@
 ---
 layout: post
-title: Introducing Hyde
+title: Overview
+excerpt_separator:  <!--more-->
 ---
 
-Hyde is a brazen two-column [Jekyll](http://jekyllrb.com) theme that pairs a prominent sidebar with uncomplicated content. It's based on [Poole](http://getpoole.com), the Jekyll butler.
+Intel SGX (Software Guard Extension) is a new instruction set in Skylake Intel CPUs since autumn 2015. It provides a reverse sandbox that protects enclaves from: 
 
-### Built on Poole
+- OS or hypervisor
+- BIOS, firmware, drivers
+- System management module (Ring 2)
+- Intel management engine (ME)
+- Any remote attack
+In short, SGX architecture is a hardware-enforced security mechanism that requires **Trusted Computing Base (TCB), Hardware Secrets, Remote Attestation, Sealed Storage and Memory Encryption**.
 
-Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by [@mdo](https://twitter.com/mdo). Poole, and every theme built on it (like Hyde here) includes the following:
+Here, **TCB** will be the CPU’s package boundary and software components related to SGX.
 
-* Complete Jekyll setup included (layouts, config, [404](/404), [RSS feed](/feed.xml), posts, and [example page](/about))
-* Mobile friendly design and development
-* Easily scalable text and component sizing with `rem` units in the CSS
-* Support for a wide gamut of HTML elements
-* Related posts (time-based, because Jekyll) below each post
-* Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)
+**Hardware Secrets** will be two 128-bit keys at production: Root Provisioning Key and Root Seal Key. Notice that RPK is known to Intel and RSK is not, therefore most of he derived key are based on RSK. We will discuss this later in the tutorial.
 
-### Hyde features
+**Remote Attestation** is enforced for the client to prove to the service provider that an enclave is running a given software, inside a given CPU, with a given security level, for a given Individual Software Vender (ISV). This is required before the service provider decides to provide requested secrets.
 
-In addition to the features of Poole, Hyde adds the following:
+**Sealed Storage** is required to save secret data to untrusted media. Data and code inside enclaves are not secrets. They are just logics that are required to process the secret and most of them are open sourced or can be reverse engineered. Therefore, secrets are provisioned later by the service provider and should be stored out of the enclave through sealing mechanism when necessary (e.g. for future usage).
 
-* Sidebar includes support for textual modules and a dynamically generated navigation with active link support
-* Two orientations for content and sidebar, default (left sidebar) and [reverse](https://github.com/poole/hyde#reverse-layout) (right sidebar), available via `<body>` classes
-* [Eight optional color schemes](https://github.com/poole/hyde#themes), available via `<body>` classes
+In summary, Intel SGX offers the following protections from known hardware and software attacks:
 
-[Head to the readme](https://github.com/poole/hyde#readme) to learn more.
+- Enclave memory cannot be read or written from outside the enclave regardless of the current privilege level and CPU mode.
+- Production enclaves cannot be debugged by software or hardware debuggers. 
+- The enclave environment cannot be entered through classic function calls, jumps, register manipulation, or stack manipulation. The only way to call an enclave function is through a new instruction that performs several protection checks.
+- Enclave memory is encrypted using industry-standard encryption algorithms with replay protection. Tapping the memory or connecting the DRAM modules to another system will yield only encrypted data.
+- The memory encryption key randomly changes every power cycle. The key is stored within the CPU and is not accessible.
+- Data isolated within enclaves can only be accessed by code that shares the enclave.
 
-### Browser support
-
-Hyde is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.
-
-### Download
-
-Hyde is developed on and hosted with GitHub. Head to the <a href="https://github.com/poole/hyde">GitHub repository</a> for downloads, bug reports, and features requests.
-
-Thanks!
+As a result, the attack surface can be largely reduced after applying Intel SGX:
+![Attack Surface](/assets/pics/overview1/png)
