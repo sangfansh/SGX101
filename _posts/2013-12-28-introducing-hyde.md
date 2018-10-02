@@ -31,4 +31,4 @@ In summary, Intel SGX offers the following protections from known hardware and s
 - Data isolated within enclaves can only be accessed by code that shares the enclave.
 
 As a result, the attack surface can be largely reduced after applying Intel SGX:
-![Attack Surface](/assets/pics/overview1/png)
+![Attack Surface](/hydeout/assets/pics/overview1/png)
