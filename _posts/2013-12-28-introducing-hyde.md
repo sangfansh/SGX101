@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Overview
-excerpt_separator:  <!--more-->
+excerpt_separator:  "<!--more-->""
 ---
 
 Intel SGX (Software Guard Extension) is a new instruction set in Skylake Intel CPUs since autumn 2015. It provides a reverse sandbox that protects enclaves from: 
