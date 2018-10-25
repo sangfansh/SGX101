@@ -1,13 +1,21 @@
 ---
 layout: page
-title: About
+title: About Us
 sidebar_link: true
+sidebar_sort_order: 5
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it
-  for your own use upon downloading. Carry on!
-</p>
+Systems Software & Security Lab
+----
 
-To make pages show up in the sidebar, add `sidebar_link: true` to the front
-matter.
+We build practical systems with focuses on security, performance, robustness, or often just for fun. Our research projects have been published in top academic conferences, and have made great impacts on real programs, such as Firefox, Android, and the Linux kernel, that you might be using every day. If you are interested in hacking with us, please drop us an email via <sslab@cc.gatech.edu>.
+
+Location
+----
+
+Klaus Advanced Computing Building, 266 Ferst Dr NW, Atlanta GA 30332-0765 [(map)](http://goo.gl/maps/1gbI8)
+
+More
+----
+
+For more information, please visit [gts3.org](https://gts3.org/).
